@@ -46,14 +46,3 @@ Note : It creates a `templates` folder inside the next js app
 ---
 
 Once build is ready swich to main directory and run `tranfer.py` this will transfer the `templates` folder to flask and static files inside the `templates` folders is moved to flasks static folder `/_next/static`
-
-### Configs
-
-Create the enviroment variables on your system for
-`MONGO_SERVER_URI`
-
-eg for mac it's
-`export MONGO_SERVER_URI=mongodb+srv://username:password@database.ajods1ldsdskc.mongodb.net/?retryWrites=true&w=majority`
-
-for windows : https://www.computerhope.com/issues/ch000549.htm
-for linux : https://www.freecodecamp.org/news/how-to-set-an-environment-variable-in-linux/
