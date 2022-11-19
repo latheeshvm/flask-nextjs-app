@@ -5,7 +5,7 @@ bp_index = Blueprint("bp_index", __name__)
 
 @bp_index.route('/')
 def index():
-    if 'username' in session:
-        return 'You are logged in ' + session['username']
-
-    return render_template('server/pages/index.html')
+    if 'email' in session:
+        return "Logged In"
+    else:
+        return render_template('server/pages/index.html')

@@ -1,9 +1,10 @@
 import bcrypt
-from flask import Blueprint, render_template, request, session, current_app
+from flask import Blueprint, redirect, render_template, request,  current_app, session, url_for
 
 
 bp_user = Blueprint("bp_user", __name__)
 db = current_app.config["db"]
+session = current_app.config["session"]
 
 
 @bp_user.route('/login')
@@ -39,17 +40,24 @@ def signup():
             str(password).encode('utf-8'), bcrypt.gensalt())
 
         try:
-            db.insert_one(
+            # TODO : Check if email already there, if there respond with an error
+            data = db.insert_one(
                 {"email": str(email), "password": str(password_hash)})
-            session.pop("email", None)
-            session['email'] = str(email)
-            # return redirect(url_for(''))
-        except:
+
+            if (data):
+                session.pop("email", None)
+                session["email"] = str(email)
+                print(session)
+                # TODO : Return Success
+                # TODO : Wait for 2 seconds then redirect to index
+                # return redirect(url_for(''))
+        except Exception as e:
+            print(e)
             print("Error in inserting")
 
     print(session)
-
-    if 'username' in session:
-        return 'You are logged in ' + session['username']
-
-    return render_template('server/pages/signup.html')
+    if 'email' in session:
+        print("Executing this")
+        return redirect(url_for('bp_index.index'))
+    else:
+        return render_template('server/pages/signup.html')
