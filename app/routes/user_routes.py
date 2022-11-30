@@ -1,7 +1,6 @@
 import bcrypt
 from flask import Blueprint, jsonify, make_response, redirect, render_template, request,  current_app, session, url_for
 
-
 bp_user = Blueprint("bp_user", __name__)
 db = current_app.config["db"]
 session = current_app.config["session"]
@@ -15,7 +14,7 @@ def login():
     return render_template('server/pages/login.html')
 
 
-@bp_user.route('/signup', methods=['POST'])
+@bp_user.route('/signup', methods=['POST', 'GET'])
 def signup():
 
     if request.method == "POST" and "email" in request.args:

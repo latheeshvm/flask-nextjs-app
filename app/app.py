@@ -19,8 +19,10 @@ app.config['session'] = session
 with app.app_context():
     from app.routes.index_route import bp_index
     from app.routes.user_routes import bp_user
+    from app.routes.protected_route import bp_protected
     app.register_blueprint(bp_index)
     app.register_blueprint(bp_user)
+    app.register_blueprint(bp_protected)
 
 
 if __name__ == "__main__":
